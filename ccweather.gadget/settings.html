@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<style type="text/css">
+			body{ 
+			width:221px;
+			height:400px;
+			margin:0px;
+		}
+		</style>
+
+	</head>
+	<body>
+		<p>
+			<label>font size</label>
+			<input type="text" id="size">
+		</p>
+		<p>
+			<label>font color</label>
+			<input type="text" id="color">
+			<a hrer="http://msdn.microsoft.com/en-us/library/windows/desktop/ff486143(v=vs.85).aspx">colors</a>
+		</p>
+		<p>
+			<label>font face</label>
+			<input type="text" id="face">
+		</p>
+		
+		<p>
+			<label>loaction</label>
+			<input type="text" id="loc">
+		</p>
+		
+		<script type="text/javascript">
+			var _size = document.getElementById("size");
+			var _color = document.getElementById("color");
+			var _face = document.getElementById("face");
+			var _loc = document.getElementById("loc");
+		
+			function init(){
+				_size.value = System.Gadget.Settings.readString("size") || 130;
+				_color.value = System.Gadget.Settings.readString("color") || 'whitesmoke';
+				_face.value = System.Gadget.Settings.readString("face") || 'arial';
+				
+				_loc.value = System.Gadget.Settings.readString("loc") || 'iowa city,ia';
+			}
+			System.Gadget.onSettingsClosing = settingsClosing;
+
+
+		// save the settings
+		function settingsClosing(event) {
+			alert("settingsClosing");
+			try{
+				if (event.closeAction == event.Action.commit) {
+					
+					
+					System.Gadget.Settings.writeString("size", _size.value || 130 ) ;
+					System.Gadget.Settings.writeString("color", _color.value || 'whitesmoke' );
+					System.Gadget.Settings.writeString("face",_face.value || 'arial' );
+					System.Gadget.Settings.writeString("loc",_loc.value || 'iowa city,ia' );
+				}
+				event.cancel = false;
+			} catch(err) {alert("settingsClosing: "+err.name+" - "+err.message)}
+		}
+		
+		init();
+			
+		</script>
+	</body>
+</html>
