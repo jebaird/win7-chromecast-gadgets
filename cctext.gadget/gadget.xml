@@ -3,7 +3,7 @@
   <name>chromecast text</name>
   <version>1.0.0.0</version>
     <author name="Jesse Baird">
-    <info url="https://github.com/jebaird/win7-chromecast-gadgets" />
+    <info url="http://jebaird.com/2014/02/14/chromecast-style-windows7-sidebar-gadgets.htm" />
     <logo src="logo.png" />
   </author>
   <hosts>
