@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<style type="text/css">
+			body{ 
+			width:221px;
+			height:294px;
+			margin:0px;
+		}
+		</style>
+
+	</head>
+	<body>
+		<p>
+			<label>font size</label>
+			<input type="text" id="size">
+		</p>
+		<p>
+			<label>font color</label>
+			<input type="text" id="color">
+		</p>
+		<p>
+			<label>font face</label>
+			<input type="text" id="face">
+		</p>
+		
+		
+		<script type="text/javascript">
+			var _size = document.getElementById("size");
+			var _color = document.getElementById("color");
+			var _face = document.getElementById("face");
+		
+			function init(){
+				_size.value = System.Gadget.Settings.readString("size") || 130;
+				_color.value = System.Gadget.Settings.readString("color") || 'whitesmoke';
+				_face.value = System.Gadget.Settings.readString("face") || 'arial';
+			}
+			System.Gadget.onSettingsClosing = settingsClosing;
+
+
+		// save the settings
+		function settingsClosing(event) {
+			alert("settingsClosing");
+			try{
+				if (event.closeAction == event.Action.commit) {
+					
+					var settings = ['size','color','face'];
+					
+					System.Gadget.Settings.writeString("size", _size.value || 130 ) ;
+					System.Gadget.Settings.writeString("color", _color.value || 'whitesmoke' );
+					System.Gadget.Settings.writeString("face",_face.value || 'arial' );
+				}
+				event.cancel = false;
+			} catch(err) {alert("settingsClosing: "+err.name+" - "+err.message)}
+		}
+		
+		init();
+			
+		</script>
+	</body>
+</html>
