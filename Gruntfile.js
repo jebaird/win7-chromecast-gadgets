@@ -1,26 +1,45 @@
+var path = require('path');
+
 module.exports = function(grunt) {
 
 // Project configuration.
 grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
+    gadgetPath: path.resolve(process.env.APPDATA, '..\\Local\\Microsoft\\Windows Sidebar\\Gadgets/') +'/',
     // watch
     watch: {
         scripts: {
-            files: '**/*.js',
-            tasks: [],
+            files: [
+                'cctext.gadget/*',
+                'ccweather.gadget/*',
+                'ccpidglet.gadget/*',
+                'ccdate.gadget/*'
+            ],
+            tasks: ['copy'],
             options: {
                 debounceDelay: 1000
             }
         }
     },
-
+// used to "install" the widgets in the gadget dir
     copy: {
         // used for developing without visual studio
         // text widget
         text: {
-            src: 'cctext.gadget/',
-            dest: 'appdata'
+            src: 'cctext.gadget/**',
+            dest: '<%= gadgetPath %>'
+        },
+        weather: {
+            src: 'ccweather.gadget/**',
+            dest: '<%= gadgetPath %>'
+        },
+        pidglet: {
+            src: 'ccpidglet.gadget/**',
+            dest: '<%= gadgetPath %>'
+        },
+        date: {
+            src: 'ccdate.gadget/**',
+            dest: '<%= gadgetPath %>'
         }
     },
 
@@ -107,7 +126,9 @@ grunt.loadNpmTasks('grunt-contrib-compress');
 grunt.loadNpmTasks('grunt-rename');
 
 // Default task(s).
-grunt.registerTask('default', ['watch']);
+grunt.registerTask('default', ['copy']);
 grunt.registerTask('build', ['compress','rename']);
+
+
 
 };
