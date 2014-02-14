@@ -1,0 +1,8 @@
+.buddy-overlay{
+	cursor: pointer;
+	position: absolute;
+	z-index: 1;
+	filter: alpha(opacity=1);
+	background-color: black;
+}
+
